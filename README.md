@@ -7,6 +7,12 @@ docker compose build --no-cache --build-arg NETBOX_VERSION=latest
 docker compose up -d
 ```
 
+Create super-user during first start
+
+```bash
+docker compose exec netbox /opt/netbox/netbox/manage.py createsuperuser
+```
+
 ## Docker image
 
 To customize Netbox installation, you can deploy your own elements:
