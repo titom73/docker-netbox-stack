@@ -1,0 +1,45 @@
+version: '3.9'
+
+networks:
+  netbox_lan:
+    name: netbox_lan
+    external: true
+
+services:
+  netbox:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: netbox:latest-plugins
+    networks:
+      netbox_lan:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.netbox.rule=Host(`netbox.as73.inetsix.net`)"
+      - "traefik.http.routers.netbox.entrypoints=web"
+      - "traefik.http.services.netbox.loadbalancer.server.port=8080"
+      - "traefik.http.routers.api.entrypoints=http"
+    ports:
+      - 8000:8080
+
+  netbox-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      netbox_lan:
+  netbox-housekeeping:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      netbox_lan:
+  postgres:
+    networks:
+      netbox_lan:
+  redis:
+    networks:
+      netbox_lan:
+  redis-cache:
+    networks:
+      netbox_lan:
