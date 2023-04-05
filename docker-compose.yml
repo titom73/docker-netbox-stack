@@ -15,9 +15,9 @@ services:
       interval: 15s
       test: "curl -f http://localhost:8080/api/ || exit 1"
     volumes:
-    - ./configuration:/etc/netbox/config:z,ro
+    - ./configuration:/etc/netbox/config:z,rw
     - ./reports:/etc/netbox/reports:z,ro
-    - ./scripts:/etc/netbox/scripts:z,ro
+    - ./scripts:/etc/netbox/scripts:z,rw
     - netbox-media-files:/opt/netbox/netbox/media:z
   netbox-worker:
     <<: *netbox
