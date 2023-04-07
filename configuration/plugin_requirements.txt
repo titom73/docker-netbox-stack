@@ -1,4 +1,9 @@
 netbox-dns
 netbox-bgp
 netbox-acls
-
+ipcalc
+networkscan
+pynetbox
+napalm
+napalm_s350
+git+https://github.com/arista-eosplus/pyeapi.git@develop
